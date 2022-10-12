@@ -11,9 +11,9 @@ function Navbar() {
         <li>
           <Link to="/Calendar">Calendar</Link>
         </li>
-        {/* <li>
-          <Link to="/Contact">Contact</Link>
-        </li> */}
+        <li>
+          <Link to="/HabitPage">My Habits</Link>
+        </li>
       </ul>
     </nav>
   );
