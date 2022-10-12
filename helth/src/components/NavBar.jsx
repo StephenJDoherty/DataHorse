@@ -14,6 +14,7 @@ function Navbar() {
         <li>
           <Link to="/HabitPage">My Habits</Link>
         </li>
+
       </ul>
     </nav>
   );
