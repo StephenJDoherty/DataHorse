@@ -1,18 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./HabitList.css";
 
 function Navbar() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
+    <nav className="Habit">
+      <ul
+        style={{
+          display: "inline-flex",
+          listStyle: "none",
+          marginBottom: "0",
+          paddingLeft: "0",
+        }}
+      >
+        <li className>
+          <Link style={{ textDecoration: "none", fontSize: "45px" }} to="/">
+            ⚕️
+          </Link>
         </li>
-        <li>
-          <Link to="/Calendar">Calendar</Link>
+        <li className="new-habit">
+          <Link style={{ textDecoration: "none" }} to="/">
+            Home
+          </Link>
         </li>
-        <li>
-          <Link to="/HabitPage">My Habits</Link>
+        <li className="new-habit">
+          <Link style={{ textDecoration: "none" }} to="/Calendar">
+            Calendar
+          </Link>
+        </li>
+        <li className="new-habit">
+          <Link style={{ textDecoration: "none" }} to="/HabitPage">
+            My Habits
+          </Link>
         </li>
       </ul>
     </nav>
