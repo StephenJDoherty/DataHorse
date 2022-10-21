@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState, useCallback } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 
@@ -16,28 +16,38 @@ const MyCalendar = (props) => {
     },
   ]);
 
-  const handleSelect = () => {
-    setMyEvents([
-      {
-        start: moment().toDate(),
-        end: moment().add(1, "days").toDate(),
-        title: "hell yes!",
-      },
-    ]);
-  };
+  const handleSelectSlot = useCallback(
+    ({ start, end }) => {
+      const title = window.prompt("New Event name");
+      if (title) {
+        setMyEvents((prev) => [...prev, { start, end, title }]);
+      }
+    },
+    [setMyEvents]
+  );
 
-  // todo: look at the props and find out how to click a day
-  // and create an event by typing
+  const deleteEvent = (deleted) => {
+    const confirm = window.confirm("Would you like to delete this event?");
+    if (confirm) {
+      setMyEvents(
+        myEvents.filter((item) => {
+          return item !== deleted;
+        })
+      );
+    }
+  };
 
   return (
     <div>
       <Calendar
+        selectable
         localizer={localizer}
         events={myEvents}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
-        onSelectEvent={handleSelect}
+        style={{ height: 800 }}
+        onSelectEvent={deleteEvent}
+        onSelectSlot={handleSelectSlot}
       />
     </div>
   );
