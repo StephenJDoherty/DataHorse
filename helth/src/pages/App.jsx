@@ -24,10 +24,24 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="Calendar"
+                element={
+                  <ProtectedRoute>
+                    <BigCalendar />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="HabitPage"
+                element={
+                  <ProtectedRoute>
+                    <HabitPage />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="Calendar" element={<BigCalendar />} />
-              <Route path="HabitPage" element={<HabitPage />} />
             </Routes>
           </UserAuthContextProvider>
         </Col>
