@@ -3,6 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
+// firestore import
+import { getFirestore, doc, addDoc, collection } from "firebase/firestore"; 
+
+
+// create firestore object 
+const firestore = getFirestore()
+// get users table
+const usersCollection = collection(firestore, 'users')
+
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +25,14 @@ const Signup = () => {
     setError("");
     try {
       await signUp(email, password);
+      // add user to db
+      const newDoc = await addDoc(usersCollection, {
+        email: email,
+        password: password,
+      });
+    
+      console.log("Document written with ID: ", newDoc.id);
+      
       navigate("/");
     } catch (err) {
       setError(err.message);

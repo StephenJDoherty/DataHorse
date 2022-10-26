@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Habit from "./Habit";
 import "./HabitList.css";
+import {collection, getDocs} from 'firebase/firestore'
+import { db } from "../firebase";
+import { useEffect } from "react";
 
 const HabitList = (props) => {
   //init everything to current state, but editMode defaults to false:
@@ -9,6 +12,20 @@ const HabitList = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [newFreq, setNewFreq] = useState("");
   const [newQual, setNewQual] = useState("");
+
+  // useEffect(() => {
+  //   getHabits()
+  // }, [])
+
+  // // firestore database connection
+  // function getHabits() {
+  //   const habitCollectionRef = collection(db, 'habitlist')
+  //   getDocs(habitCollectionRef)
+  //     .then(response =>{
+  //       console.log(response)
+  //     })
+  //     .catch(error => console.log.log(error.message))
+  // }
 
   //add handler:
   const handleAdd = (event) => {
