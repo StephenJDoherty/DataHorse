@@ -32,10 +32,6 @@ const Signup = () => {
         uid: uid,
       });
 
-      await setDoc(doc(firestore, "habitlist", uid), {
-        uid: uid,
-      });
-
       navigate("/");
     } catch (err) {
       setError(err.message);

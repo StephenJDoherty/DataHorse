@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import firebase, { auth } from "../firebase";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
+
+// create firestore object
+const db = getFirestore();
 
 const Habit = (habit) => {
   const defaultFormState = {
@@ -10,6 +15,7 @@ const Habit = (habit) => {
   const [formState, setFormState] = useState(defaultFormState);
   const [submittedEdit, setSubmittedEdit] = useState(defaultFormState);
   const [editMode, setEditMode] = useState(false);
+  const uid = auth.currentUser.uid;
 
   const handleInputChange = (event) => {
     console.log(event.target.name, event.target.value, formState);
@@ -19,7 +25,7 @@ const Habit = (habit) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
     setSubmittedEdit(formState);
@@ -29,6 +35,13 @@ const Habit = (habit) => {
     } else {
       setEditMode(true);
     }
+
+    let docID = formState.name + "_" + uid;
+    //update habit document with new qual and/or freq:
+    await updateDoc(doc(db, "habits", docID), {
+      qual: formState.qual.toString(),
+      freq: formState.freq.toString(),
+    });
   };
 
   return (
@@ -64,9 +77,6 @@ const Habit = (habit) => {
             className="edit-input"
             value={formState.qual}
           >
-            <option id="neutral" value="neutral">
-              {" "}
-            </option>
             <option id="good" value="good">
               At least
             </option>

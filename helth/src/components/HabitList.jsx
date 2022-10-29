@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Habit from "./Habit";
 import "./HabitList.css";
-import {collection, getDocs} from 'firebase/firestore'
-import { db } from "../firebase";
+import firebase, { auth } from "../firebase";
+// firestore import
+import { deleteDoc, getFirestore, doc, setDoc } from "firebase/firestore";
 import { useEffect } from "react";
+
+// create firestore object
+const db = getFirestore();
 
 const HabitList = (props) => {
   //init everything to current state, but editMode defaults to false:
@@ -11,7 +15,9 @@ const HabitList = (props) => {
   const [habitList, setHabitList] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [newFreq, setNewFreq] = useState("");
-  const [newQual, setNewQual] = useState("");
+  const [newQual, setNewQual] = useState("good");
+
+  const uid = auth.currentUser.uid;
 
   // useEffect(() => {
   //   getHabits()
@@ -28,7 +34,7 @@ const HabitList = (props) => {
   // }
 
   //add handler:
-  const handleAdd = (event) => {
+  const handleAdd = async (event) => {
     event.preventDefault();
     console.log(newHabit, newFreq, newQual);
     props.onAddHabit(newHabit, newFreq, newQual, editMode);
@@ -36,13 +42,27 @@ const HabitList = (props) => {
     setNewFreq("");
     setNewQual("");
     setEditMode(false);
+
+    //until I become a FireStore genius, each habit has its own document:
+    let docID = newHabit + "_" + uid;
+    //create a new doc for each habit added:
+    await setDoc(doc(db, "habits", docID), {
+      uid: uid,
+      name: newHabit.toString(),
+      qual: newQual.toString(),
+      freq: newFreq,
+    });
   };
 
   //delete handler:
-  const handleDelete = (event) => {
+  const handleDelete = async (event) => {
     props.onDelete(event.target.value);
     const habits = habitList.filter((c) => c.name !== event.target.value);
     setHabitList(habits);
+
+    //grab the document in question + delete from DB:
+    let docID = event.target.value + "_" + uid;
+    await deleteDoc(doc(db, "habits", docID));
   };
 
   //these should all be ONE HANDLER TO RULE THEM ALL, but I can't make it work yet:
@@ -89,10 +109,7 @@ const HabitList = (props) => {
           name="qual"
           value={newQual}
         >
-          <option id="neutral" value="neutral">
-            Exactly
-          </option>
-          <option id="good" value="good">
+          <option id="good" selected="true" value="good">
             At least
           </option>
           <option id="bad" value="bad">
