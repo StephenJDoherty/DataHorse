@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Habit from "./Habit";
 import "./HabitList.css";
-import firebase, { auth } from "../firebase";
-// firestore import
+import { auth } from "../firebase";
 import { deleteDoc, getFirestore, doc, setDoc } from "firebase/firestore";
-import { useEffect } from "react";
 
 // create firestore object
 const db = getFirestore();
@@ -19,25 +17,14 @@ const HabitList = (props) => {
 
   const uid = auth.currentUser.uid;
 
-  // useEffect(() => {
-  //   getHabits()
-  // }, [])
-
-  // // firestore database connection
-  // function getHabits() {
-  //   const habitCollectionRef = collection(db, 'habitlist')
-  //   getDocs(habitCollectionRef)
-  //     .then(response =>{
-  //       console.log(response)
-  //     })
-  //     .catch(error => console.log.log(error.message))
-  // }
-
   //add handler:
   const handleAdd = async (event) => {
     event.preventDefault();
     console.log(newHabit, newFreq, newQual);
     props.onAddHabit(newHabit, newFreq, newQual, editMode);
+    if (newQual === "") {
+      let newQual = "good";
+    }
     setNewHabit("");
     setNewFreq("");
     setNewQual("");

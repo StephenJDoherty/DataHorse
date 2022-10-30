@@ -77,7 +77,7 @@ const Habit = (habit) => {
             className="edit-input"
             value={formState.qual}
           >
-            <option id="good" value="good">
+            <option id="good" selected="true" value="good">
               At least
             </option>
             <option id="bad" value="bad">
