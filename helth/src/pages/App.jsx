@@ -8,6 +8,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import { UserAuthContextProvider } from "../context/UserAuthContext";
 import BigCalendar from "./Calendar";
 import HabitPage from "./HabitPage";
+import TrackPage from "./TrackPage";
 
 function App() {
   return (
@@ -37,6 +38,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <HabitPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="TrackPage"
+                element={
+                  <ProtectedRoute>
+                    <TrackPage />
                   </ProtectedRoute>
                 }
               />

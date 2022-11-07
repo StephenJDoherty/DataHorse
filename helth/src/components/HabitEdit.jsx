@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import firebase, { auth } from "../firebase";
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import HabitList from "./HabitList";
 
 // create firestore object
 const db = getFirestore();
 
-const Habit = (habit) => {
+const HabitEdit = (habit) => {
   const defaultFormState = {
     name: habit.name,
     freq: habit.freq,
@@ -122,4 +123,4 @@ const Habit = (habit) => {
   );
 };
 
-export default Habit;
+export default HabitEdit;

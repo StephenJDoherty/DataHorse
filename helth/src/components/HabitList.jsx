@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Habit from "./Habit";
+import HabitEdit from "./HabitEdit";
 import "./HabitList.css";
 import { auth } from "../firebase";
 import { deleteDoc, getFirestore, doc, setDoc } from "firebase/firestore";
@@ -10,7 +10,7 @@ const db = getFirestore();
 const HabitList = (props) => {
   //init everything to current state, but editMode defaults to false:
   const [newHabit, setNewHabit] = useState("");
-  const [habitList, setHabitList] = useState([]);
+  const [habitList, setHabitList] = useState(props.habits);
   const [editMode, setEditMode] = useState(false);
   const [newFreq, setNewFreq] = useState("");
   const [newQual, setNewQual] = useState("good");
@@ -27,7 +27,7 @@ const HabitList = (props) => {
     }
     setNewHabit("");
     setNewFreq("");
-    setNewQual("");
+    setNewQual(newQual);
     setEditMode(false);
 
     //until I become a FireStore genius, each habit has its own document:
@@ -74,7 +74,7 @@ const HabitList = (props) => {
         (
           habit //maps over list of habits:
         ) => (
-          <Habit {...habit} handleDelete={handleDelete} />
+          <HabitEdit {...habit} handleDelete={handleDelete} />
         )
       )}
 
