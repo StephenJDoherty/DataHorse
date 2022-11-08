@@ -33,6 +33,11 @@ function Navbar() {
             My Habits
           </Link>
         </li>
+        <li className="new-habit">
+          <Link style={{ textDecoration: "none" }} to="/TrackPage">
+            Track Today
+          </Link>
+        </li>
       </ul>
     </nav>
   );

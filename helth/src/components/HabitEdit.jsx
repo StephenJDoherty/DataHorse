@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import firebase, { auth } from "../firebase";
+import { getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import HabitList from "./HabitList";
 
-const Habit = (habit) => {
+// create firestore object
+const db = getFirestore();
+
+const HabitEdit = (habit) => {
   const defaultFormState = {
     name: habit.name,
     freq: habit.freq,
@@ -10,6 +16,7 @@ const Habit = (habit) => {
   const [formState, setFormState] = useState(defaultFormState);
   const [submittedEdit, setSubmittedEdit] = useState(defaultFormState);
   const [editMode, setEditMode] = useState(false);
+  const uid = auth.currentUser.uid;
 
   const handleInputChange = (event) => {
     console.log(event.target.name, event.target.value, formState);
@@ -19,7 +26,7 @@ const Habit = (habit) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
     setSubmittedEdit(formState);
@@ -29,6 +36,13 @@ const Habit = (habit) => {
     } else {
       setEditMode(true);
     }
+
+    let docID = formState.name + "_" + uid;
+    //update habit document with new qual and/or freq:
+    await updateDoc(doc(db, "habits", docID), {
+      qual: formState.qual.toString(),
+      freq: formState.freq.toString(),
+    });
   };
 
   return (
@@ -64,10 +78,7 @@ const Habit = (habit) => {
             className="edit-input"
             value={formState.qual}
           >
-            <option id="neutral" value="neutral">
-              {" "}
-            </option>
-            <option id="good" value="good">
+            <option id="good" selected="true" value="good">
               At least
             </option>
             <option id="bad" value="bad">
@@ -112,4 +123,4 @@ const Habit = (habit) => {
   );
 };
 
-export default Habit;
+export default HabitEdit;

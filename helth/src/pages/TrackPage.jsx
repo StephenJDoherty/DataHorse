@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import HabitList from "../components/HabitList";
 import {
   collection,
   where,
@@ -8,24 +7,22 @@ import {
   query,
 } from "firebase/firestore";
 import { auth } from "../firebase";
+import TrackList from "../components/TrackList";
 
-function HabitPage() {
+function TrackPage() {
   const [habitList, setHabitList] = useState([]);
-  const db = getFirestore();
-  const colRef = collection(db, "habits");
-  //query all docs where uid = current user's uid:
-  const q = query(colRef, where("uid", "==", auth.currentUser.uid));
 
   useEffect(() => {
     const getHabits = async () => {
-      console.log("ue");
+      console.log("ue")
       //initialize empty array:
       let init = [];
       //get database + habits collection:
       const db = getFirestore();
       const colRef = collection(db, "habits");
       //query all docs where uid = current user's uid:
-      const q = query(colRef, where("uid", "==", auth.currentUser.uid));
+      const q = query(colRef, where
+      ("uid", "==", auth.currentUser.uid));
       //take snapshot of docs returned by query:
       const snapShot = await getDocs(q);
       //for each doc in the snapshot, grab the attributes...
@@ -42,36 +39,14 @@ function HabitPage() {
     getHabits().catch(console.error);
   }, []); //end of useEffect
 
-  const handleAdd = (habitName, habitFreq, habitQual, editMode) => {
-    if (habitList.filter((h) => h.name === habitName).length > 0) {
-      handleDelete(habitName);
-    } else if (habitName === "") {
-      return;
-    } else if (habitList.filter((h) => h.name === habitName).length > 0) {
-      handleDelete(habitName);
-    }
 
-    setHabitList((prevHabitList) => {
-      return [
-        ...prevHabitList,
-        { name: habitName, freq: habitFreq, qual: habitQual, shown: editMode },
-      ];
-    });
-  };
 
-  const handleDelete = (habitName) => {
-    const habits = habitList.filter((h) => h.name !== habitName);
-    setHabitList(habits);
-    return habitList;
-  };
 
   return (
-    <HabitList
+    <TrackList
       habits={habitList}
-      onDelete={handleDelete}
-      onAddHabit={handleAdd}
     />
   );
 }
 
-export default HabitPage;
+export default TrackPage;
