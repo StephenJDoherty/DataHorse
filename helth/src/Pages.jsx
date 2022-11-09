@@ -75,12 +75,12 @@ const Habit = (habit) => {
             </option>
           </select>
 
-          //Added
-          useEffect(() => {
-                if (habit && handleInputChange) {
-                  setMySavedValue(habit)
-                 }
-            }, []);
+          {/*//Added*/}
+          {/*useEffect(() => {*/}
+          {/*      if (habit && handleInputChange) {*/}
+          {/*        setMySavedValue(habit)*/}
+          {/*       }*/}
+          {/*  }, []);*/}
 
           <input
             type="number"
@@ -92,11 +92,11 @@ const Habit = (habit) => {
             onChange={handleInputChange}
 
            //Added 
-           useEffect(() => {
-                if (freq && handleInputChange) {
-                  setMySavedValue(freq)
-                 }
-            }, []);
+           // useEffect(() => {
+           //      if (freq && handleInputChange) {
+           //        setMySavedValue(freq)
+           //       }
+           //  }, []);
 
           />
           <span> time(s) per week</span>

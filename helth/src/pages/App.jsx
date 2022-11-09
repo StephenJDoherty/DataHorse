@@ -41,14 +41,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="TrackPage"
-                element={
-                  <ProtectedRoute>
-                    <TrackPage />
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                    path="TrackPage"
+                    element={
+                        <ProtectedRoute>
+                            <TrackPage />
+                        </ProtectedRoute>
+                    }
+                />
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>

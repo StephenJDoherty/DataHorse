@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./HabitList.css";
+import {Button} from "react-bootstrap";
 
 function Navbar() {
   return (
@@ -36,6 +37,12 @@ function Navbar() {
         <li className="new-habit">
           <Link style={{ textDecoration: "none" }} to="/TrackPage">
             Track Today
+          </Link>
+        </li>
+        <li className="new-habit">
+          <Link style={{ textDecoration: "none" }} to="/">
+            Log out
+            {/*TODO I think this would be nice, but am not sure how to make it work*/}
           </Link>
         </li>
       </ul>

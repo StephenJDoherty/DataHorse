@@ -4,7 +4,6 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
-import Navbar from "../components/NavBar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
