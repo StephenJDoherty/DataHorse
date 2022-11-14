@@ -10,7 +10,6 @@ const db = getFirestore();
 const HabitList = (props) => {
   //init everything to current state, but editMode defaults to false:
   const [newHabit, setNewHabit] = useState("");
-  const [habitList, setHabitList] = useState(props.habits);
   const [editMode, setEditMode] = useState(false);
   const [newFreq, setNewFreq] = useState("");
   const [newQual, setNewQual] = useState("good");
@@ -44,8 +43,6 @@ const HabitList = (props) => {
   //delete handler:
   const handleDelete = async (event) => {
     props.onDelete(event.target.value);
-    const habits = habitList.filter((c) => c.name !== event.target.value);
-    setHabitList(habits);
 
     //grab the document in question + delete from DB:
     let docID = event.target.value + "_" + uid;
@@ -70,11 +67,13 @@ const HabitList = (props) => {
         <h1>Someday I'll be a ✨list of habits✨</h1>
         <h3>Current goals:</h3>
 
-        {props.habits.map(
+        {props.list.map(
             (
                 habit //maps over list of habits:
             ) => (
-                <HabitEdit {...habit} handleDelete={handleDelete} />
+                <HabitEdit
+                    key={habit.name}
+                    {...habit} handleDelete={handleDelete} />
             )
         )}
 

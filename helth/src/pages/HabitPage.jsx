@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import HabitList from "../components/HabitList";
 import {
   collection,
   where,
@@ -9,12 +8,9 @@ import {
 } from "firebase/firestore";
 import { auth } from "../firebase";
 
-function HabitPage() {
-  const [habitList, setHabitList] = useState([]);
-  const db = getFirestore();
-  const colRef = collection(db, "habits");
-  //query all docs where uid = current user's uid:
-  const q = query(colRef, where("uid", "==", auth.currentUser.uid));
+function HabitPage(props) {
+  console.log("props = ", props);
+  const [list, setList] = useState([]);
 
   useEffect(() => {
     const getHabits = async () => {
@@ -23,7 +19,7 @@ function HabitPage() {
       let init = [];
       //get database + habits collection:
       const db = getFirestore();
-      const colRef = collection(db, "habits");
+      const colRef = collection(db, props.collectionPath);
       //query all docs where uid = current user's uid:
       const q = query(colRef, where("uid", "==", auth.currentUser.uid));
       //take snapshot of docs returned by query:
@@ -37,37 +33,39 @@ function HabitPage() {
         init.push({ name, qual, freq });
       }); //end of forEach
       //setHabitList to init:
-      setHabitList(init);
+      console.log("props component", props.Component);
+      console.log("init", init);
+      setList(init);
     }; // end of getHabits
     getHabits().catch(console.error);
   }, []); //end of useEffect
 
-  const handleAdd = (habitName, habitFreq, habitQual, editMode) => {
-    if (habitList.filter((h) => h.name === habitName).length > 0) {
-      handleDelete(habitName);
-    } else if (habitName === "") {
+  const handleAdd = (name, freq, quality, editMode) => {
+    if (list.filter((h) => h.name === name).length > 0) {
+      handleDelete(name);
+    } else if (name === "") {
       return;
-    } else if (habitList.filter((h) => h.name === habitName).length > 0) {
-      handleDelete(habitName);
+    } else if (list.filter((h) => h.name === name).length > 0) {
+      handleDelete(name);
     }
 
-    setHabitList((prevHabitList) => {
+    setList((prevList) => {
       return [
-        ...prevHabitList,
-        { name: habitName, freq: habitFreq, qual: habitQual, shown: editMode },
+        ...prevList,
+        { name: name, freq: freq, qual: quality, shown: editMode },
       ];
     });
   };
 
-  const handleDelete = (habitName) => {
-    const habits = habitList.filter((h) => h.name !== habitName);
-    setHabitList(habits);
-    return habitList;
+  const handleDelete = (name) => {
+    const filteredHabits = list.filter((h) => h.name !== name);
+    setList(filteredHabits);
+    return list;
   };
 
   return (
-    <HabitList
-      habits={habitList}
+    <props.Component
+      list={list}
       onDelete={handleDelete}
       onAddHabit={handleAdd}
     />

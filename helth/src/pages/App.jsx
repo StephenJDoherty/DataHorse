@@ -8,7 +8,8 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import { UserAuthContextProvider } from "../context/UserAuthContext";
 import BigCalendar from "./Calendar";
 import HabitPage from "./HabitPage";
-import TrackPage from "./TrackPage";
+import HabitList from "../components/HabitList";
+import TrackList from "../components/TrackList";
 
 function App() {
   return (
@@ -37,18 +38,24 @@ function App() {
                 path="HabitPage"
                 element={
                   <ProtectedRoute>
-                    <HabitPage />
+                    <HabitPage
+                      collectionPath={"habits"}
+                      Component={HabitList}
+                    />
                   </ProtectedRoute>
                 }
               />
-                <Route
-                    path="TrackPage"
-                    element={
-                        <ProtectedRoute>
-                            <TrackPage />
-                        </ProtectedRoute>
-                    }
-                />
+              <Route
+                path="TrackPage"
+                element={
+                  <ProtectedRoute>
+                    <HabitPage
+                      collectionPath={"habits"}
+                      Component={TrackList}
+                    />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>

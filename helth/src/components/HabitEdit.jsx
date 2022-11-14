@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import firebase, { auth } from "../firebase";
+import { auth } from "../firebase";
 import { getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import HabitList from "./HabitList";
 
 // create firestore object
 const db = getFirestore();
@@ -46,80 +45,80 @@ const HabitEdit = (habit) => {
   };
 
   return (
-      <div className="HabitList">
-        {editMode && (
-            <form onSubmit={handleSubmit}>
-              <button className="button" type="submit">
-                ✏️
-              </button>
+    <div className="HabitList">
+      {editMode && (
+        <form onSubmit={handleSubmit}>
+          <button className="button" type="submit">
+            ✏️
+          </button>
 
-              <button
-                  className="button"
-                  onClick={habit.handleDelete}
-                  value={habit.name}
-              >
-                🗑️
-              </button>
+          <button
+            className="button"
+            onClick={habit.handleDelete}
+            value={habit.name}
+          >
+            🗑️
+          </button>
 
-              {submittedEdit.name}
+          {submittedEdit.name}
 
-              <input
-                  type="hidden"
-                  className="edit"
-                  name="name"
-                  id="name"
-                  value={habit.name}
-                  onChange={handleInputChange}
-              />
+          <input
+            type="hidden"
+            className="edit"
+            name="name"
+            id="name"
+            value={habit.name}
+            onChange={handleInputChange}
+          />
 
-              <select
-                  onChange={handleInputChange}
-                  name="qual"
-                  className="edit-input"
-                  value={formState.qual}
-              >
-                <option id="good" selected="true" value="good">
-                  At least
-                </option>
-                <option id="bad" value="bad">
-                  No more than
-                </option>
-              </select>
+          <select
+            onChange={handleInputChange}
+            name="qual"
+            className="edit-input"
+            value={formState.qual}
+          >
+            <option id="good" selected="true" value="good">
+              At least
+            </option>
+            <option id="bad" value="bad">
+              No more than
+            </option>
+          </select>
 
-              <input
-                  type="number"
-                  min="1"
-                  className="edit-input"
-                  name="freq"
-                  id="freq"
-                  value={formState.freq}
-                  onChange={handleInputChange}
-              />
-              <span> time(s) per week</span>
-            </form>
-        )}
+          <input
+            type="number"
+            min="1"
+            className="edit-input"
+            name="freq"
+            id="freq"
+            value={formState.freq}
+            onChange={handleInputChange}
+          />
+          <span> time(s) per week</span>
+        </form>
+      )}
 
-        {!editMode && ( //render non-editing version of habit:
-            <div className="HabitList">
-              <button className="button" onClick={handleSubmit}>
-                ✏️
-              </button>
-              <button
-                  className="button"
-                  onClick={habit.handleDelete}
-                  value={habit.name}
-              >
-                🗑️
-              </button>
-              {submittedEdit.name}
-              <span> </span>
-              {submittedEdit.freq}
-              {submittedEdit.qual === "good" && <span> (or more) </span>}
-              {submittedEdit.qual === "bad" && <span> (or fewer) </span>}
-              <span> time(s) per week</span>
-            </div>
-        )}
-      </div>
+      {!editMode && ( //render non-editing version of habit:
+        <div className="HabitList">
+          <button className="button" onClick={handleSubmit}>
+            ✏️
+          </button>
+          <button
+            className="button"
+            onClick={habit.handleDelete}
+            value={habit.name}
+          >
+            🗑️
+          </button>
+          {submittedEdit.name}
+          <span> </span>
+          {submittedEdit.freq}
+          {submittedEdit.qual === "good" && <span> (or more) </span>}
+          {submittedEdit.qual === "bad" && <span> (or fewer) </span>}
+          <span> time(s) per week</span>
+        </div>
+      )}
+    </div>
   );
 };
 

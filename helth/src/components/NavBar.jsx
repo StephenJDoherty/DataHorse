@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./HabitList.css";
 import {Button} from "react-bootstrap";
+import {auth} from "../firebase";
 
 function Navbar() {
   return (
@@ -40,8 +41,11 @@ function Navbar() {
           </Link>
         </li>
         <li className="new-habit">
-          <Link style={{ textDecoration: "none" }} to="/">
+          <Link style={{ textDecoration: "none" }}
+                // onClick={() => firebase.default.
+                to="/">
             Log out
+
             {/*TODO I think this would be nice, but am not sure how to make it work*/}
           </Link>
         </li>
