@@ -21,13 +21,6 @@ const HabitList = (props) => {
     event.preventDefault();
     console.log(newHabit, newFreq, newQual);
     props.onAddHabit(newHabit, newFreq, newQual, editMode);
-    if (newQual === "") {
-      let newQual = "good";
-    }
-    setNewHabit("");
-    setNewFreq("");
-    setNewQual(newQual);
-    setEditMode(false);
 
     //until I become a FireStore genius, each habit has its own document:
     let docID = newHabit + "_" + uid;
@@ -63,62 +56,70 @@ const HabitList = (props) => {
   };
 
   return (
-      <div className="HabitList">
-        <h1>Someday I'll be a ✨list of habits✨</h1>
-        <h3>Current goals:</h3>
+    <div className="HabitList">
+      <h1>✨My Habits✨</h1>
 
-        {props.list.map(
+      {props.list.length <= 0 && <h3>Add some habits to keep track of:</h3>}
+
+      {props.list.length > 0 && (
+        <div>
+          <h3>Current goals:</h3>
+
+          {props.list.map(
             (
-                habit //maps over list of habits:
+              habit //maps over list of habits:
             ) => (
-                <HabitEdit
-                    key={habit.name}
-                    {...habit} handleDelete={handleDelete} />
+              <HabitEdit
+                key={habit.name}
+                {...habit}
+                handleDelete={handleDelete}
+              />
             )
-        )}
+          )}
 
-        {/* form to add a new goal :*/}
-        <h3>New goal:</h3>
-        <form className="Habit" onSubmit={handleAdd}>
-          <input
-              className="new-habit"
-              type="text"
-              placeholder="New Habit"
-              id="habitname"
-              value={newHabit}
-              onChange={habitChangeHandler}
-          />
+          <h3>New goal:</h3>
+        </div>
+      )}
+      <form className="Habit" onSubmit={handleAdd}>
+        <input
+          className="new-habit"
+          type="text"
+          placeholder="New Habit"
+          id="habitname"
+          value={newHabit}
+          onChange={habitChangeHandler}
+        />
 
-          <select
-              className="new-habit"
-              onChange={qualChangeHandler}
-              name="qual"
-              value={newQual}
-          >
-            <option id="good" selected="true" value="good">
-              At least
-            </option>
-            <option id="bad" value="bad">
-              No more than
-            </option>
-          </select>
+        <select
+          className="new-habit"
+          onChange={qualChangeHandler}
+          name="qual"
+          value={newQual}
+        >
+          <option id="good" selected="true" value="good">
+            At least
+          </option>
+          <option id="bad" value="bad">
+            No more than
+          </option>
+        </select>
 
-          <input
-              type="number"
-              min="1"
-              className="new-habit"
-              placeholder="Times per week"
-              id="freq"
-              value={newFreq}
-              onChange={freqChangeHandler}
-          />
+        <input
+          type="number"
+          min="1"
+          className="new-habit"
+          placeholder="Times per week"
+          id="freq"
+          value={newFreq}
+          onChange={freqChangeHandler}
+        />
 
-          <input type="hidden" id="editing" value={editMode} />
-          <button className="button" type="submit">
-            ➕
-          </button>
-        </form>
-      </div>
+        <input type="hidden" id="editing" value={editMode} />
+        <button className="button" type="submit">
+          ➕
+        </button>
+      </form>
+    </div>
   ); //return
 }; //habitlist
 

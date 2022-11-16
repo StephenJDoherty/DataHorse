@@ -129,6 +129,7 @@ const TrackHabit = (habit) => {
     return (
         <div className="habit-name">
             <form onSubmit={handleSubmit}>
+             <div>  <span> ● </span>
 
                 {submittedEdit.name}:
 
@@ -147,6 +148,7 @@ const TrackHabit = (habit) => {
                 <button className="button" type="submit">
                     ✔️
                 </button>
+             </div>
             </form>
         </div>
     );

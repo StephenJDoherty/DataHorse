@@ -2,19 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd537b7-c6d3-4a46-8609-d9c99b284cc1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/helth/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/helth/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/helth/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/helth/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/Pages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/Pages.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/components/HabitEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/HabitEdit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/components/HabitList.css" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/HabitList.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/components/HabitList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/HabitList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/components/NavBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/NavBar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/components/TrackHabit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/TrackHabit.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/components/TrackList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/TrackList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helth/src/context/UserAuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/context/UserAuthContext.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/pages/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/pages/Calendar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/Calendar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helth/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helth/src/pages/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/Signup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +39,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/lg/VSC/DataHorse HISTORYNICE",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/lg/Desktop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.vagrant&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -68,6 +66,12 @@
       <workItem from="1667960274598" duration="14000" />
       <workItem from="1667960291241" duration="5157000" />
       <workItem from="1668012486521" duration="12618000" />
+      <workItem from="1668387001011" duration="1038000" />
+      <workItem from="1668388060745" duration="464000" />
+      <workItem from="1668388531200" duration="245000" />
+      <workItem from="1668546863415" duration="3113000" />
+      <workItem from="1668615831434" duration="5758000" />
+      <workItem from="1668621620319" duration="51000" />
     </task>
     <servers />
   </component>

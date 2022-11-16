@@ -22,7 +22,10 @@ function App() {
                 path="/home"
                 element={
                   <ProtectedRoute>
-                    <Home />
+                    {/*<Home />*/}
+                      <HabitPage
+                          collectionPath={"habits"}
+                          Component={TrackList}/>
                   </ProtectedRoute>
                 }
               />
@@ -35,7 +38,7 @@ function App() {
                 }
               />
               <Route
-                path="HabitPage"
+                path="MyHabits"
                 element={
                   <ProtectedRoute>
                     <HabitPage
@@ -46,7 +49,7 @@ function App() {
                 }
               />
               <Route
-                path="TrackPage"
+                path="TrackDay"
                 element={
                   <ProtectedRoute>
                     <HabitPage

@@ -4,6 +4,7 @@ import "./HabitList.css";
 import { auth } from "../firebase";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import TrackHabit from "./TrackHabit";
+import {Link} from "react-router-dom";
 
 const db = getFirestore();
 
@@ -46,9 +47,20 @@ const TrackList = (props) => {
 
   return (
     <div className="HabitList">
-      <h1>✨Dear diary, today I did stuff~✨</h1>
-      <h3>Current goals:</h3>
+      <h1>✨Progress and mood for {dayStr}✨</h1>
+      {(props.list.length <= 0) &&
+          <div>
+          <h3>Not currently tracking any habits--
+            <Link style={{ textDecoration: "none" }} to="/HabitPage">
+              add some, here!
+            </Link>
+          </h3>
+          </div>
+      }
 
+      {(props.list.length > 0) &&
+          <div>
+            <h3>I did...</h3>
       {props.list.map(
         (
           habit //maps over list of habits:
@@ -56,8 +68,10 @@ const TrackList = (props) => {
           <TrackHabit {...habit} handleSubmit={handleSubmit} />
         )
       )}
+          </div>
+      }
 
-      <h3>And I feel...</h3>
+      <h3>And I feel:</h3>
       <form className="HabitList" onSubmit={handleSubmit}>
         <button className="button-face" value="5" onClick={moodChangeHandler}>
           😁
