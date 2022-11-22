@@ -86,8 +86,6 @@ const MyCalendar = (props) => {
     }
   };
 
-  // add rainbow effect update to events
-
   const eventStyleGetter = () => {
     let backgroundColor = "blue";
     let score = ""; // need to get the score locally here
