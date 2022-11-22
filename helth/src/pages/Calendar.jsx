@@ -86,7 +86,7 @@ const MyCalendar = (props) => {
     }
   };
 
-  // add rainbow effect update
+  // add rainbow effect update to events
 
   const eventStyleGetter = () => {
     let backgroundColor = "blue";
