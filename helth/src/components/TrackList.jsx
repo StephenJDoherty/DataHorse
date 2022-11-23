@@ -4,7 +4,7 @@ import "./HabitList.css";
 import { auth } from "../firebase";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import TrackHabit from "./TrackHabit";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const db = getFirestore();
 
@@ -17,7 +17,7 @@ const TrackList = (props) => {
   const today = new Date();
   const dayStr = // "0000-00-00"  //just handy for testing, for now
     //this dayStr, below, is for "actual" use:
-    today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   const startDate = new Date(today.getFullYear(), 0, 1);
   const days = Math.floor((today - startDate) / (24 * 60 * 60 * 1000));
   const weekNum = Math.ceil(days / 7);
@@ -39,6 +39,18 @@ const TrackList = (props) => {
       },
       { merge: true }
     ); //will create doc if DNE, update otherwise
+
+    // setting emoji database for calendar
+    let doc_ID = "Day_" + dayStr + "_" + uid;
+    await setDoc(
+      doc(db, "emoji", doc_ID),
+      {
+        uid: uid,
+        date: dayStr,
+        mood: dayMood,
+      },
+      { merge: true }
+    );
   };
 
   const moodChangeHandler = (event) => {
@@ -48,28 +60,29 @@ const TrackList = (props) => {
   return (
     <div className="HabitList">
       <h1>✨Progress and mood for {dayStr}✨</h1>
-      {(props.list.length <= 0) &&
-          <div>
-          <h3>Not currently tracking any habits--
+      {props.list.length <= 0 && (
+        <div>
+          <h3>
+            Not currently tracking any habits--
             <Link style={{ textDecoration: "none" }} to="/HabitPage">
               add some, here!
             </Link>
           </h3>
-          </div>
-      }
-
-      {(props.list.length > 0) &&
-          <div>
-            <h3>I did...</h3>
-      {props.list.map(
-        (
-          habit //maps over list of habits:
-        ) => (
-          <TrackHabit {...habit} handleSubmit={handleSubmit} />
-        )
+        </div>
       )}
-          </div>
-      }
+
+      {props.list.length > 0 && (
+        <div>
+          <h3>I did...</h3>
+          {props.list.map(
+            (
+              habit //maps over list of habits:
+            ) => (
+              <TrackHabit {...habit} handleSubmit={handleSubmit} />
+            )
+          )}
+        </div>
+      )}
 
       <h3>And I feel:</h3>
       <form className="HabitList" onSubmit={handleSubmit}>
