@@ -24,46 +24,52 @@ const MyCalendar = (props) => {
 
   const [myEvents, setMyEvents] = useState([
     {
-      start: moment().toDate(),
-      end: moment().add(1, "days").toDate(),
-      title: "Click to try deleting me!",
+      start: "",
+      end: "",
+      title: "",
+      mood: "",
     },
   ]);
 
   // connect to the database and pull data into the calendar based
   // on the dates that have habit history
 
-  useEffect(() => {
-    onPageLoad();
-  }, []);
+  // useEffect(() => {
+  //   console.log("here 2");
+  //   const uid = auth.currentUser.uid;
+  //   // run one time, when page is rendered
+  //   // want to getDoc for the historyNice table and
+  //   // for the rating 1-5 show the smiling face emoji associated, also
+  //   // make the comment green if 5/4, yellow if 3/2 and red if 1 (5 highest)
+  //   // need the historyNice to include the date when set
+  //   // question what is a score good/bad?
 
-  const onPageLoad = async () => {
-    const uid = auth.currentUser.uid;
-    // run one time, when page is rendered
-    // want to getDoc for the historyNice table and
-    // for the rating 1-5 show the smiling face emoji associated, also
-    // make the comment green if 5/4, yellow if 3/2 and red if 1 (5 highest)
-    // need the historyNice to include the date when set
-    // question what is a score good/bad?
+  //   const today = new Date(); // format this to match what we are saving
+  //   const scoreMood = collection(db, "emoji");
+  //   const query = query(scoreMood, where("uid", "==", uid));
 
-    const today = new Date(); // format this to match what we are saving
-    const scoreMood = collection(db, "historyNice");
-    const query = query(scoreMood, where("uid", "==", uid));
+  //   // create the object array where the date matches and then call SetMyEvents
+  //   // map thru the events and create an object with start, end, and score/ mood emoji
 
-    // create the object array where the date matches and then call SetMyEvents
-    // map thru the events and create an object with start, end, and score/ mood emoji
+  //   const dailyRating = getDocs(query);
+  //   const eventHistory = [];
+  //   dailyRating.forEach((doc) => {
+  //     console.log("here 3");
+  //     let mood = doc.get("mood");
+  //     let date = doc.get("date");
+  //     let dateMoment = moment(date);
+  //     // push this mood eventhistory array
+  //     eventHistory.push({
+  //       start: dateMoment,
+  //       end: moment().add(1, "days").toDate(),
+  //       title: mood,
+  //     });
+  //   });
 
-    const eventHistory = [];
-    const dailyRating = await getDocs(query);
-    dailyRating.forEach((doc) => {
-      let mood = doc.get("mood");
-      let score = doc.get("score");
-      // push this mood and score to eventhistory array
-      eventHistory.push({ mood, score });
-    });
-
-    setMyEvents(eventHistory);
-  };
+  //   setMyEvents(eventHistory);
+  //   console.log("My eventhistory: ", eventHistory);
+  //   console.log("my events: ", myEvents);
+  // }, []);
 
   const handleSelectSlot = useCallback(
     ({ start, end }) => {
