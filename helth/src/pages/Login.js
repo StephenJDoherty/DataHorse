@@ -35,7 +35,6 @@ const Login = () => {
 
   return (
     <>
-
       <div className="p-4 box">
         <h2 className="mb-3">Helth Login</h2>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -65,11 +64,11 @@ const Login = () => {
         <hr />
         {/*removed because it doesn't seem to work:*/}
         {/*<div>*/}
-          {/*<GoogleButton*/}
-          {/*  className="g-btn"*/}
-          {/*  type="dark"*/}
-          {/*  onClick={handleGoogleSignIn}*/}
-          {/*/>*/}
+        {/*<GoogleButton*/}
+        {/*  className="g-btn"*/}
+        {/*  type="dark"*/}
+        {/*  onClick={handleGoogleSignIn}*/}
+        {/*/>*/}
         {/*</div>*/}
       </div>
       <div className="p-4 box mt-3 text-center">
