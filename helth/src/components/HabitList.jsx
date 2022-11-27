@@ -22,6 +22,14 @@ const HabitList = (props) => {
     console.log(newHabit, newFreq, newQual);
     props.onAddHabit(newHabit, newFreq, newQual, editMode);
 
+    if (newQual === "") {
+      let newQual = "good";
+    }
+    setNewHabit("");
+    setNewFreq("");
+    setNewQual(newQual);
+    setEditMode(false);
+
     //until I become a FireStore genius, each habit has its own document:
     let docID = newHabit + "_" + uid;
     //create a new doc for each habit added:

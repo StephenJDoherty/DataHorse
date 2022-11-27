@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd537b7-c6d3-4a46-8609-d9c99b284cc1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/components/HabitList.css" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/HabitList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/components/HabitList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/HabitList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/components/NavBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/NavBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/components/TrackHabit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/TrackHabit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/components/TrackList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/components/TrackList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/context/UserAuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/context/UserAuthContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/pages/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helth/src/pages/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/helth/src/pages/Signup.js" afterDir="false" />
-    </list>
+    <list default="true" id="4fd537b7-c6d3-4a46-8609-d9c99b284cc1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
