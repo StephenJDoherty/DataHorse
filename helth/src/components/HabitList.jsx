@@ -15,6 +15,13 @@ const HabitList = (props) => {
   const [newQual, setNewQual] = useState("good");
 
   const uid = auth.currentUser.uid;
+  const today = new Date();
+  const dayStr =
+      today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  const startDate = new Date(today.getFullYear(), 0, 1);
+  const days = Math.floor((today - startDate) / (24 * 60 * 60 * 1000));
+  const weekNum = Math.ceil(days / 7);
+
 
   //add handler:
   const handleAdd = async (event) => {
@@ -47,7 +54,9 @@ const HabitList = (props) => {
 
     //grab the document in question + delete from DB:
     let docID = event.target.value + "_" + uid;
+    let weekDocID = event.target.value+"_week"+weekNum+"_"+uid;
     await deleteDoc(doc(db, "habits", docID));
+    await deleteDoc(doc(db, "currentWeek", weekDocID));
   };
 
   //these should all be ONE HANDLER TO RULE THEM ALL, but I can't make it work yet:

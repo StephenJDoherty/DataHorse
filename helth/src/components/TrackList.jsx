@@ -17,10 +17,6 @@ const TrackList = (props) => {
   const today = new Date();
   const dayStr =
   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  const startDate = new Date(today.getFullYear(), 0, 1);
-  const days = Math.floor((today - startDate) / (24 * 60 * 60 * 1000));
-  const weekNum = Math.ceil(days / 7);
-  let wkField = "wk" + weekNum + "_score";
 
   useEffect(() => {
     handleSubmit().catch(console.error);

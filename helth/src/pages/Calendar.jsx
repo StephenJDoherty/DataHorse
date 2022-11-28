@@ -1,8 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import moment from "moment";
-import "../components/HabitList.css";
-
 import "../App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {collection, getDocs, getFirestore, query, where} from "firebase/firestore";
@@ -10,6 +8,8 @@ import {auth} from "../firebase";
 
 const db = getFirestore();
 const localizer = momentLocalizer(moment);
+
+
 
 const MyCalendar = (props) => {
     const [myEvents, setMyEvents] = useState([
@@ -68,7 +68,7 @@ const MyCalendar = (props) => {
 
 
     useEffect(() => {
-        getData(dates).then(r => console.log("got dates"))
+        getData(dates).then(r => console.log("ue (Calendar) called"))
     }, []); //end of useEffect
 
 
@@ -104,21 +104,39 @@ const MyCalendar = (props) => {
     };
 
 
+    const getColor = (date) => {
+       //lol. lmao, even
+    }
+
+
+    function getImage(mood) {
+        if(mood==="5")  { return `${"url(emoji_grin.png)"}` }
+        if(mood==="4")  { return `${"url(emoji_smile.png)"}` }
+        if(mood==="3")  { return `${"url(emoji_meh.png)"}` }
+        if(mood==="2")  { return `${"url(emoji_frown.png)"}` }
+        if(mood==="1")  { return `${"url(emoji_sob.png)"}` }
+    }
+
     const calendarStyle = (date) => {
 
         for (let i = 0; i < data.length; i++) {
             let dataDate = data[i].d8;
+            let mood = data[i].mood;
+
             let allDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
 
             if (allDate === dataDate) {
                 return {
+
                     style: {
-                        backgroundColor: 'yellow',
-                        dateStyle: "sdfs",
-                        // border: '1px solid gray',
+                        // backgroundColor:`${getColor(dataDate.toString())}`,
+                        backgroundImage: getImage(mood),
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: '35%',
+                        backgroundPosition: 'bottom 10px left 10px',
                         margin: 0,
                         padding: 0,
-                        // TODO I WANT A PICTURE OR LARGE EMOJI TEXT HERE SO BADDDDD
                     },
                 }
             }
@@ -127,23 +145,18 @@ const MyCalendar = (props) => {
 
     return (
         <div>
-            <img src ="cal02.png"
-                 width={'100%'}
-                 height={'100%'}/>
-            {/*<Calendar*/}
-
-            {/*    selectable*/}
-            {/*    localizer={localizer}*/}
-            {/*    events={myEvents}*/}
-            {/*    startAccessor="start"*/}
-            {/*    endAccessor="end"*/}
-            {/*    style={{height: 800}}*/}
-            {/*    onSelectEvent={deleteEvent}*/}
-            {/*    dayPropGetter={calendarStyle}*/}
-            {/*    onSelectSlot={handleSelectSlot}*/}
-            {/*    eventPropGetter={eventStyleGetter}*/}
-
-            {/*/>*/}
+            <Calendar
+                selectable
+                localizer={localizer}
+                events={myEvents}
+                startAccessor="start"
+                endAccessor="end"
+                style={{height: 800, color: getColor}}
+                onSelectEvent={deleteEvent}
+                dayPropGetter={calendarStyle}
+                onSelectSlot={handleSelectSlot}
+                eventPropGetter={eventStyleGetter}
+            />
         </div>
     );
 };
