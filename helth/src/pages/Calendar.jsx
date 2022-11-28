@@ -127,20 +127,23 @@ const MyCalendar = (props) => {
 
     return (
         <div>
-            <Calendar
+            <img src ="cal02.png"
+                 width={'100%'}
+                 height={'100%'}/>
+            {/*<Calendar*/}
 
-                selectable
-                localizer={localizer}
-                events={myEvents}
-                startAccessor="start"
-                endAccessor="end"
-                style={{height: 800}}
-                onSelectEvent={deleteEvent}
-                dayPropGetter={calendarStyle}
-                onSelectSlot={handleSelectSlot}
-                eventPropGetter={eventStyleGetter}
+            {/*    selectable*/}
+            {/*    localizer={localizer}*/}
+            {/*    events={myEvents}*/}
+            {/*    startAccessor="start"*/}
+            {/*    endAccessor="end"*/}
+            {/*    style={{height: 800}}*/}
+            {/*    onSelectEvent={deleteEvent}*/}
+            {/*    dayPropGetter={calendarStyle}*/}
+            {/*    onSelectSlot={handleSelectSlot}*/}
+            {/*    eventPropGetter={eventStyleGetter}*/}
 
-            />
+            {/*/>*/}
         </div>
     );
 };
