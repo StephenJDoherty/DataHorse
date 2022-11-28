@@ -15,12 +15,11 @@ const TrackList = (props) => {
 
   //get strings for today's date and the number of the current week:
   const today = new Date();
-  const dayStr = "2022-11-10"; //just handy for testing, for now
-  //this dayStr, below, is for "actual" use:
-  // today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  const dayStr =
+  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   const startDate = new Date(today.getFullYear(), 0, 1);
   const days = Math.floor((today - startDate) / (24 * 60 * 60 * 1000));
-  const weekNum = 45; //Math.ceil(days / 7);
+  const weekNum = Math.ceil(days / 7);
   let wkField = "wk" + weekNum + "_score";
 
   useEffect(() => {
@@ -32,26 +31,14 @@ const TrackList = (props) => {
     event.preventDefault();
     setDayMood(event.target.value);
 
-    let docID = "week" + weekNum + "_" + uid;
-    await setDoc(
+    await setDoc( //update day's mood in history collection:
       doc(db, "history", uid),
       {
-        [dayStr]: dayMood, // date: day's mood
+        [dayStr]: dayMood,
       },
       { merge: true }
-    ); //will create doc if DNE, update otherwise
+    ); //will create doc if DNE, otherwise update existing one
 
-    // setting emoji database for calendar
-    let doc_ID = "Day_" + dayStr + "_" + uid;
-    await setDoc(
-      doc(db, "emoji", doc_ID),
-      {
-        uid: uid,
-        date: dayStr,
-        mood: dayMood,
-      },
-      { merge: true }
-    );
   };
 
   const moodChangeHandler = (event) => {
@@ -77,8 +64,8 @@ const TrackList = (props) => {
           <h3>I did...</h3>
           {props.list.map(
             (
-              habit //maps over list of habits:
-            ) => (
+              habit
+            ) => ( //maps over list of habits:
               <TrackHabit {...habit} handleSubmit={handleSubmit} />
             )
           )}

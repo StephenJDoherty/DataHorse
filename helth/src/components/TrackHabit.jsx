@@ -26,19 +26,17 @@ const TrackHabit = (habit) => {
 
   //get strings for today's date and the number of the current week:
   const today = new Date();
-  const dayStr = "2022-11-10"; //just handy for testing, for now
-  //this dayStr, below, is for "actual" use:
-  // today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  const dayStr =
+  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   const startDate = new Date(today.getFullYear(), 0, 1);
   const days = Math.floor((today - startDate) / (24 * 60 * 60 * 1000));
-  const weekNum = 45; //Math.ceil(days / 7);
-
+  const weekNum = Math.ceil(days / 7);
   let wkField = "wk" + weekNum + "_score";
 
   //function to grab num of times user has already completed a habit:
   const getTimesThisWeek = async () => {
     let t = 0;
-    //get database + historyMess collection:
+    //get database + currentWk collection:
     const db = getFirestore();
     const colRef = collection(db, "currentWeek");
     //query all docs where uid = current user's uid && habit = this habit:
@@ -108,7 +106,7 @@ const TrackHabit = (habit) => {
     //create or update document with too much information:
     let docID = habit.name + "_week" + weekNum + "_" + uid;
     await setDoc(
-      doc(db, "currentWeek", uid),
+      doc(db, "currentWeek", docID),
       {
         uid: uid,
         habit: habit.name,
@@ -124,8 +122,7 @@ const TrackHabit = (habit) => {
     );
 
     let score = await getWeekScore();
-    //initialize a doc in HistoryNice
-    let niceID = "week" + weekNum + "_" + uid;
+    //initialize a doc in history collection:
     await setDoc(
       doc(db, "history", uid),
       {

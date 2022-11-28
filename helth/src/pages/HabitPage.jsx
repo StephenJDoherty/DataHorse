@@ -17,7 +17,7 @@ function HabitPage(props) {
       console.log("ue");
       //initialize empty array:
       let init = [];
-      //get database + habits collection:
+      //get DB + habits collection:
       const db = getFirestore();
       const colRef = collection(db, props.collectionPath);
       //query all docs where uid = current user's uid:

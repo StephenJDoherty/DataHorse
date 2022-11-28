@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth } from "../firebase";
-import { getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
 
 // create firestore object
 const db = getFirestore();
@@ -30,7 +30,7 @@ const HabitEdit = (habit) => {
     console.log(formState);
     setSubmittedEdit(formState);
 
-    if (editMode) {
+    if (editMode) { //switch editMode to its opposite
       setEditMode(false);
     } else {
       setEditMode(true);

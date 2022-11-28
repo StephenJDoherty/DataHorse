@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
+import {collection, deleteDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,27 @@ const Login = () => {
   const [error, setError] = useState("");
   const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
+
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), 0, 1);
+  const days = Math.floor((today - startDate) / (24 * 60 * 60 * 1000));
+  const weekNum = Math.ceil(days / 7);
+
+  useEffect(() => { //cleans out currentWeek when needed:
+    const newWeek = async () => {
+      const db = getFirestore();
+      const colRef = collection(db, "currentWeek");
+      //query all docs where week < current:
+      const q = query(colRef, where("week", "<", weekNum));
+      //take snapshot of docs returned by query:
+      const snapShot = await getDocs(q);
+      //for each doc in the snapshot, delete it!:
+      snapShot.forEach((doc) => {
+        deleteDoc(doc.ref);
+      }); //end of forEach
+    }; // end of newWeek
+    newWeek().catch(console.error);
+  }, []); //end of useEffect
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,15 +45,7 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      await googleSignIn();
-      navigate("/home");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+
 
   return (
     <>
